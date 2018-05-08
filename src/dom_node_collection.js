@@ -3,10 +3,14 @@ export default class DOMNodeCollection {
     this.elements = HTMLelements;
   }
 
+  each(callback) {
+    this.elements.forEach(callback);
+  }
+
   html(htmlString) {
     switch (typeof htmlString) {
       case "string":
-        this.elements.forEach(element => element.innerHTML = htmlString);
+        this.each(element => element.innerHTML = htmlString);
         break;
       case "undefined":
         return this.elements[0].innerHTML;
@@ -22,12 +26,12 @@ export default class DOMNodeCollection {
   append(content) {
     switch (typeof content) {
       case "string":
-        this.elements.forEach(element => element.innerHTML += content);
+        this.each(element => element.innerHTML += content);
         break;
       case "object":
         if (!(content instanceof DOMNodeCollection)) content = $k(content);
-        this.elements.forEach((parentElement) => {
-          content.elements.forEach((childElement) => {
+        this.each((parentElement) => {
+          content.each((childElement) => {
             parentElement.appendChild(childElement.cloneNode(true));
           });
         });
@@ -42,9 +46,11 @@ export default class DOMNodeCollection {
       case "undefined":
         return this.elements[0].getAttribute(attributeName);
       case "string":
-        this.elements.forEach(element => element.setAttribute(attributeName, value));
+        this.each(element => element.setAttribute(attributeName, value));
     }
   }
 
-  
+  addClass(className) {
+    this.each(element => element.classList.add(className));
+  }
 }
