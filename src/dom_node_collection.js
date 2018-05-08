@@ -36,4 +36,15 @@ export default class DOMNodeCollection {
         throw "Invalid argument";
     }
   }
+
+  attr(attributeName, value) {
+    switch (typeof value) {
+      case "undefined":
+        return this.elements[0].getAttribute(attributeName);
+      case "string":
+        this.elements.forEach(element => element.setAttribute(attributeName, value));
+    }
+  }
+
+  
 }
