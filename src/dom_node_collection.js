@@ -67,11 +67,17 @@ export default class DOMNodeCollection {
   }
 
   parent() {
-
+    const parents = [];
+    this.each((element) => {
+      if (!parents.includes(element.parentNode)) {
+        parents.push(element.parentNode);
+      }
+    });
+    return new DOMNodeCollection(parents);
   }
 
   find() {
-
+    
   }
 
   remove() {
