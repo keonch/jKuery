@@ -60,7 +60,7 @@ export default class DOMNodeCollection {
 
   children() {
     let allChildren = [];
-    this.each(element => {
+    this.each((element) => {
       allChildren = allChildren.concat(Array.from(element.children));
     });
     return new DOMNodeCollection(allChildren);
@@ -76,11 +76,16 @@ export default class DOMNodeCollection {
     return new DOMNodeCollection(parents);
   }
 
-  find() {
-    
+  find(selector) {
+    let elements = [];
+    this.each((element) => {
+      const selectedElements = element.querySelectorAll(selector);
+      elements = elements.concat(Array.from(selectedElements));
+    });
+    return new DOMNodeCollection(elements);
   }
 
   remove() {
-
+    
   }
 }
