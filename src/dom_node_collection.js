@@ -53,4 +53,8 @@ export default class DOMNodeCollection {
   addClass(className) {
     this.each(element => element.classList.add(className));
   }
+
+  removeClass(className) {
+    this.each(element => element.classList.remove(className));
+  }
 }
