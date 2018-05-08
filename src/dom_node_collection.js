@@ -57,4 +57,24 @@ export default class DOMNodeCollection {
   removeClass(className) {
     this.each(element => element.classList.remove(className));
   }
+
+  children() {
+    let allChildren = [];
+    this.each(element => {
+      allChildren = allChildren.concat(Array.from(element.children));
+    });
+    return new DOMNodeCollection(allChildren);
+  }
+
+  parent() {
+
+  }
+
+  find() {
+
+  }
+
+  remove() {
+
+  }
 }
