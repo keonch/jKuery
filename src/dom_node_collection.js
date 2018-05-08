@@ -4,17 +4,36 @@ export default class DOMNodeCollection {
   }
 
   html(htmlString) {
-    if (typeof htmlString === 'undefined') {
-      return this.elements[0].innerHTML;
-    } else if (typeof htmlString === 'string') {
-      this.elements.forEach(node => node.innerHTML = htmlString);
-      return htmlString;
-    } else {
-      throw "Argument is not valid";
+    switch (typeof htmlString) {
+      case "string":
+        this.elements.forEach(element => element.innerHTML = htmlString);
+        break;
+      case "undefined":
+        return this.elements[0].innerHTML;
+      default:
+        throw "Invalid Argument";
     }
   }
 
   empty() {
     this.html('');
+  }
+
+  append(content) {
+    switch (typeof content) {
+      case "string":
+        this.elements.forEach(element => element.innerHTML += content);
+        break;
+      case "object":
+        if (!(content instanceof DOMNodeCollection)) content = $k(content);
+        this.elements.forEach((parentElement) => {
+          content.elements.forEach((childElement) => {
+            parentElement.appendChild(childElement.cloneNode(true));
+          });
+        });
+        break;
+      default:
+        throw "Invalid argument";
+    }
   }
 }
