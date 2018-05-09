@@ -1,5 +1,7 @@
 import DOMNodeCollection from './dom_node_collection';
 
+const _callbacks = [];
+
 function $k(selector) {
   switch (typeof selector) {
     case "string":
@@ -15,10 +17,8 @@ function $k(selector) {
       }
 
     case "function":
-      const callbacks = [];
-      callbacks.push(selector)
-      // signal when document is ready
-      // callbacks.forEach(callback => callback());
+      if (document.readyState !== "complete") _callbacks.push(selector);
+      break;
 
     default:
       throw "Invalid argument"
@@ -26,9 +26,13 @@ function $k(selector) {
 }
 
 function extend(...obj) {
-  arguments(obj).forEach((arg) =>)
+  // arguments(obj).forEach((arg) =>)
 }
 
 window.$k = $k;
+
+document.addEventListener('DOMContentLoaded', () => {
+  _callbacks.forEach(callback => callback());
+})
 
 export default $k;
