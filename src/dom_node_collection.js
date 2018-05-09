@@ -99,4 +99,12 @@ export default class DOMNodeCollection {
 
     }
   }
+
+  on(events, handler) {
+    this.each(element => element.addEventListener(events, handler()));
+  }
+
+  off(events) {
+    
+  }
 }
