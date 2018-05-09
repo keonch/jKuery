@@ -85,7 +85,18 @@ export default class DOMNodeCollection {
     return new DOMNodeCollection(elements);
   }
 
-  remove() {
-    
+  remove(selector) {
+    switch (typeof selector) {
+      case "undefined":
+        this.each(element => element.parentNode.removeChild(element));
+        break;
+      case "string":
+        this.each(element => {
+          const foundElements = $k(element).find(selector);
+          foundElements.each(element => element.remove());
+        });
+      default:
+
+    }
   }
 }
