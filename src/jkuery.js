@@ -25,8 +25,13 @@ function $k(selector) {
   }
 }
 
-function extend(...obj) {
-  // arguments(obj).forEach((arg) =>)
+$k.extend = function(obj, ...objs) {
+  objs.forEach((object) => {
+    Object.keys(object).forEach((key) => {
+      obj[key] = object[key];
+    })
+  });
+  return obj;
 }
 
 window.$k = $k;
