@@ -45,12 +45,17 @@ $k.ajax = function(settings) {
   if (settings.type) defaultSettings.method = settings.type;
   settings = $k.extend(defaultSettings, settings);
 
-  const xhr = new XMLHttpRequest();
-  xhr.open(settings.method.toUpperCase(), settings.url, settings.async);
-  xhr.onload = function() {
-    xhr.status === 200 ? settings.success(xhr.response) : settings.error(xhr.response);
-  };
-  xhr.send(JSON.stringify(settings.data));
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open(settings.method.toUpperCase(), settings.url, settings.async);
+    xhr.onload = () => resolve(xhr.response);
+    xhr.onerror = () => reject(xhr.statusText);
+    xhr.send(JSON.stringify(settings.data));
+  });
+
+  // xhr.onload = function() {
+  //   xhr.status === 200 ? settings.success(xhr.response) : settings.error(xhr.response);
+  // };
 }
 
 document.addEventListener('DOMContentLoaded', () => {
