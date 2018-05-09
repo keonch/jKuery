@@ -100,11 +100,23 @@ export default class DOMNodeCollection {
     }
   }
 
-  on(events, handler) {
-    this.each(element => element.addEventListener(events, handler()));
+  on(event, handler) {
+    this.each((element) => {
+      element.addEventListener(event, handler);
+      const eventKey = `jKuery-${event}`;
+      if (!element[eventKey]) element[eventKey] = [];
+      element[eventKey].push(handler);
+    });
   }
 
-  off(events) {
-    
+  off(event) {
+    this.each((element) => {
+      const eventKey = `jKuery-${event}`;
+      if (element[eventKey]) {
+        element[eventKey].forEach((callback) => {
+          element.removeEventListener(event, callback);
+        });
+      }
+    });
   }
 }
