@@ -14,9 +14,21 @@ function $k(selector) {
         throw "Invalid argument"
       }
 
+    case "function":
+      const callbacks = [];
+      callbacks.push(selector)
+      // signal when document is ready
+      // callbacks.forEach(callback => callback());
+
     default:
       throw "Invalid argument"
   }
 }
 
+function extend(...obj) {
+  arguments(obj).forEach((arg) =>)
+}
+
 window.$k = $k;
+
+export default $k;
