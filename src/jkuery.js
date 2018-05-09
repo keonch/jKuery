@@ -27,17 +27,36 @@ function $k(selector) {
 
 $k.extend = function(obj, ...objs) {
   objs.forEach((object) => {
-    Object.keys(object).forEach((key) => {
-      obj[key] = object[key];
-    })
+    Object.keys(object).forEach(key => obj[key] = object[key]);
   });
   return obj;
 }
 
-window.$k = $k;
+$k.ajax = function(settings) {
+  const defaultSettings = {
+    method: 'GET',
+    url: '',
+    data: {},
+    success: () => {},
+    error: () => {},
+    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+    async: true
+  }
+  if (settings.type) defaultSettings.method = settings.type;
+  settings = $k.extend(defaultSettings, settings);
+
+  const xhr = new XMLHttpRequest();
+  xhr.open(settings.method.toUpperCase(), settings.url, settings.async);
+  xhr.onload = function() {
+    xhr.status === 200 ? settings.success(xhr.response) : settings.error(xhr.response);
+  };
+  xhr.send(JSON.stringify(settings.data));
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   _callbacks.forEach(callback => callback());
 })
 
 export default $k;
+
+window.$k = $k;
