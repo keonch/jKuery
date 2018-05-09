@@ -1,4 +1,4 @@
-# jKuery
+# jkuery
 A vanilla JS DOM manipulation library, replicating the most widely developed library - jQuery.
 Core Function:
 $k()
