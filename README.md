@@ -1,21 +1,26 @@
 # jkuery
+
 A vanilla JS DOM manipulation library, replicating the most widely developed library - jQuery.
-Core Function:
-$k()
-$k.extend()
-$k.ajax()
-DOM manipulation features:
-html()
-If it does not receive an argument, it returns the innerHTML of the first targeted DOM node.
-If invoked with a string argument, it will set the innerHTML to the input for each DOM node selected.
-empty()
-append()
-attr()
-addClass()
-removeClass()
-children()
-parent()
-find()
-remove()
-on()
-off()
+
+Simply npm install the library to use its APIs.
+
+`npm install jkuery`
+
+Core Function - `$k(selector)`
+
+|Featured APIs|
+|-|
+|`html(htmlString)`|
+|`empty()`|
+|`append(content)`|
+|`attr(attributeName, value)`|
+|`addClass(className)`|
+|`removeClass(className)`|
+|`children()`|
+|`parent()`|
+|`find(selector)`|
+|`remove(selector)`|
+|`on(event, handler)`|
+|`off(event)`|
+
+Also features `$k.ajax(settings)` request with `Promise`
