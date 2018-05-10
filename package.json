@@ -1,0 +1,22 @@
+{
+  "name": "jkuery",
+  "version": "1.0.0",
+  "description": "A vanilla JS DOM manipulation library, replicating the most widely developed library - jQuery.",
+  "main": "src/jkuery.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/keonch/jkuery.git"
+  },
+  "keywords": [
+    "jkuery"
+  ],
+  "author": "Keon Choi <keonch91@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/keonch/jkuery/issues"
+  },
+  "homepage": "https://github.com/keonch/jkuery#readme"
+}
